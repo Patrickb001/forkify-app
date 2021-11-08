@@ -131,39 +131,39 @@ const clearBookmarks = function () {
 };
 // clearBookmarks();
 
-export const uploadRecipe = async function (newRecipe) {
-  try {
-    const ingredients = Object.entries(newRecipe)
-      .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
-      .map(ing => {
-        const ingArr = ing[1].split(',').map(el => el.trim());
-        // const ingArr = ing[1].replaceAll(' ', '').split(',');
-        if (ingArr.length !== 3)
-          throw new Error(
-            'Wrong ingredient format! please use the correct format :)'
-          );
+// export const uploadRecipe = async function (newRecipe) {
+//   try {
+//     const ingredients = Object.entries(newRecipe)
+//       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+//       .map(ing => {
+//         const ingArr = ing[1].split(',').map(el => el.trim());
+//         // const ingArr = ing[1].replaceAll(' ', '').split(',');
+//         if (ingArr.length !== 3)
+//           throw new Error(
+//             'Wrong ingredient format! please use the correct format :)'
+//           );
 
-        const [quantity, unit, description] = ingArr;
+//         const [quantity, unit, description] = ingArr;
 
-        return { quantity: quantity ? +quantity : null, unit, description };
-      });
-    // console.log(ingredients);
+//         return { quantity: quantity ? +quantity : null, unit, description };
+//       });
+//     // console.log(ingredients);
 
-    const recipe = {
-      title: newRecipe.title,
-      source_url: newRecipe.sourceUrl,
-      image_url: newRecipe.image,
-      publisher: newRecipe.publisher,
-      cooking_time: +newRecipe.cookingTime,
-      servings: +newRecipe.servings,
-      ingredients,
-    };
+//     const recipe = {
+//       title: newRecipe.title,
+//       source_url: newRecipe.sourceUrl,
+//       image_url: newRecipe.image,
+//       publisher: newRecipe.publisher,
+//       cooking_time: +newRecipe.cookingTime,
+//       servings: +newRecipe.servings,
+//       ingredients,
+//     };
 
-    const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
-    console.log(data);
-    state.recipe = createRecipeObject(data);
-    addBookmark(state.recipe);
-  } catch (err) {
-    throw err;
-  }
-};
+//     const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
+//     console.log(data);
+//     state.recipe = createRecipeObject(data);
+//     addBookmark(state.recipe);
+//   } catch (err) {
+//     throw err;
+//   }
+// };
